@@ -71,7 +71,7 @@
         <copy attributes="href" css:theme="a.gl-logo" css:content="a#portal-logo" />
 
         <!-- ** custom navbar compatible with webflow ** -->
-        <replace css:theme-children="nav.w-nav-menu">
+        <replace css:theme-children="nav.gl-menu">
           <xsl:for-each css:select="ul#portal-globalnav li">
             <a><xsl:attribute name="class">w-nav-link gl-menu-link
               </xsl:attribute><xsl:attribute name="href"><xsl:value-of select="./a/@href" /></xsl:attribute>
