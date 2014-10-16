@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules
+    xmlns="http://namespaces.plone.org/diazo"
+    xmlns:css="http://namespaces.plone.org/diazo/css"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+    <!-- Apply the following rules to standard Plone pages -->
+    <rules css:if-content="#visual-portal-wrapper">
+
+        <theme href="http://glossinator.webflow.com/" />
+        <!-- To change your theme simply change theme entry above
+            to the url of your theme (or use a local index.html)
+            <theme href="http://glossinator.webflow.com/" /> -->
+
+        <!-- Replace title with Plone's page title  -->
+        <replace css:theme="html head title" css:content="html head title" />
+
+        <!-- Drop the favicon spec coming from content; we'll use the one in the theme. -->
+        <drop content="/html/head/link[@rel='shortcut icon']" />
+
+        <!-- Copy base tag from Plone -->
+        <before css:theme-children="html head" css:content="html head base" />
+
+        <!-- Copy link, style, meta tags from Plone head -->
+        <before css:theme-children="html head"
+               content="/html/head/link | /html/head/style | /html/head/meta" />
+
+        <!-- merge classes from Plone body with theme body -->
+        <merge attributes="class" css:theme="body" css:content="body" />
+
+        <!-- Copy script tags from Plone head to end of body -->
+        <after css:theme-children="html body" css:content="html head script" />
+
+        <!-- Move inline scripts in content to end of body -->
+        <drop css:content="body script" />
+        <after css:theme-children="html body" css:content="html body script" method="raw" />
+
+      
+       <!--
+        # Gloss - Dynamic Templating with Class
+        Gloss is a css powered dynamic templating system. It uses special css classes to control the 
+        behaviour of your template. In the background a small
+        set of diazo rules do the heavy lifting.
+
+        For the first version of gloss we have chosen to make the frontpage static. this will be changed over time.
+        And also not to use portlets.
+        -->
+        <!-- *** gloss classes ** -->
+        <!--
+            classes provided:
+            #################
+            a.gl-logo (must be placed on an a tag, this is to preserve home link)
+            {gl namespace}-{what}-n{qualifier}
+            .gl-menu-link - add style to individual menu items
+            .gl-inner-only - only show on inner pages
+            .gl-front-only - only show on the frontpage
+            .gl-editbar - adds an edit bar
+            .gl-content - inserts the site content
+            .gl-content-body
+            .gl-content-byline
+            .gl-content-description
+            .gl-content-title
+
+            To change your theme simply change theme entry
+            to the url of your site (or use a local index.html)
+            <theme href="http://glossinator.webflow.com/" />
+
+
+        -->
+        <!-- logo replace -->
+        <copy attributes="href" css:theme="a.gl-logo" css:content="a#portal-logo" />
+
+        <!-- ** custom navbar compatible with webflow ** -->
+        <replace css:theme-children="nav.w-nav-menu">
+          <xsl:for-each css:select="ul#portal-globalnav li">
+            <a><xsl:attribute name="class">w-nav-link gl-menu-link
+              </xsl:attribute><xsl:attribute name="href"><xsl:value-of select="./a/@href" /></xsl:attribute>
+              <xsl:copy-of select="./a/text()" /></a>
+            </xsl:for-each>
+        </replace>
+
+          <drop css:theme=".gl-inner-only" 
+             css:if-content=".section-front-page" />    
+        
+          <drop css:theme=".gl-front-only" 
+            css:if-not-content=".section-front-page" />
+
+       
+          <rules css:if-content=".section-front-page.section-front-page.template-atct_edit.userrole-manager">
+            <replace css:theme-children="body" 
+                css:content="#content" 
+                 />
+            </rules>
+            <before css:theme-children=".gl-editbar" 
+                css:content="#edit-bar" />
+            <replace css:theme-children=".gl-content" 
+                css:content="#content" />
+            
+            <replace css:theme-children=".gl-content-byline" 
+                css:content="#plone-document-byline" />
+            <replace css:theme-children=".gl-content-description" 
+                css:content-children="#parent-fieldname-description" />
+            <replace css:theme-children=".gl-content-title" 
+                css:content-children="#parent-fieldname-title" />
+            <replace css:theme-children=".gl-content-body" 
+                css:content="#content-core" />
+          <!-- </rules> -->
+          <!-- include a test rendering -->
+          <before css:theme-children="body"
+              css:if-content="body.userrole-manager">
+            <a href="{$portal_url}/test_rendering" 
+                style="position:fixed;color:#ededed;font-size:10px;z-index:2000;padding:4px;background:red;opacity:.5;">test render</a>
+
+          </before>
+           <before css:theme-children="body"
+              css:if-content="body.userrole-manager">
+            <a href="{$portal_url}/front-page/edit" 
+                style="position:fixed;left:70px;color:#ededed;font-size:10px;z-index:2000;padding:4px;background:green;opacity:.5;">edit front</a>
+
+          </before>
+
+          <!-- end of gloss rules -->
+        
+
+        
+
+    </rules>
+ 
+<!--
+html element ->
+
+Unordered lists
+ul -> gl-ul
+contained li -> gl-ul-li
+
+Ordered lists
+ol -> gl-ol
+contained li -> gl-ol-li
+-->
+<!-- not being used at the moment -->
+<!--
+         <xsl:template match="ul">
+         <xsl:copy>
+            <xsl:attribute name="class">gl-ul</xsl:attribute>
+            <xsl:copy-of select="@*" />
+            <xsl:apply-templates />
+        </xsl:copy>
+        </xsl:template>
+         <xsl:template match="ol">
+         <xsl:copy>
+            <xsl:attribute name="class">gl-ol</xsl:attribute>
+            <xsl:copy-of select="@*" />
+            <xsl:apply-templates />
+        </xsl:copy>
+        </xsl:template>
+         <xsl:template match="ol/li">
+         <xsl:copy>
+            <xsl:attribute name="class">gl-ol-li</xsl:attribute>
+            <xsl:copy-of select="@*" />
+            <xsl:apply-templates />
+        </xsl:copy>
+        </xsl:template>
+         <xsl:template match="ul/li">
+         <xsl:copy>
+            <xsl:attribute name="class">gl-ul-li</xsl:attribute>
+            <xsl:copy-of select="@*" />
+            <xsl:apply-templates />
+        </xsl:copy>
+        </xsl:template>
+ -->
+</rules>
