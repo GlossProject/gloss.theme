@@ -18,12 +18,14 @@ classes provided::
             .gl-menu-link - add style to individual menu items
             .gl-inner-only - only show on inner pages
             .gl-front-only - only show on the frontpage
-            .gl-editbar - adds an edit bar
+            .gl-edit-bar - adds an edit bar
             .gl-content - inserts the site content
             .gl-content-body
             .gl-content-byline
             .gl-content-description
             .gl-content-title
+            
+For the most up-to-date listing of classes visit http://tinyurl.com/gloss-docs
 
 
 
