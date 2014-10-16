@@ -91,7 +91,7 @@
                 css:content="#content" 
                  />
             </rules>
-            <before css:theme-children=".gl-editbar" 
+            <before css:theme-children=".gl-edit-bar" 
                 css:content="#edit-bar" />
             <replace css:theme-children=".gl-content" 
                 css:content="#content" />
