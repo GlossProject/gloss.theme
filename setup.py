@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.2'
+version = '0.3'
 
 setup(name='gloss.theme',
       version=version,
@@ -15,10 +15,10 @@ setup(name='gloss.theme',
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
         ],
-      keywords='',
-      author='',
-      author_email='',
-      url='http://svn.plone.org/svn/collective/',
+      keywords='theme,gloss',
+      author='David Bain',
+      author_email='david@alteroo.com',
+      url='https://github.com/glossproject/gloss.theme',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['gloss'],
