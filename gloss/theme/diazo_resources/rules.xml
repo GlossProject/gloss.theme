@@ -142,6 +142,16 @@
 
     </rules>
  
+ <!-- necessary xsl transforms for webflow compatibility -->
+ <!--
+  add extra styles somewhere
+  .gl-fieldset {
+    position:relative;
+   }
+  .gl-checkbox-input{position:relative;left:40px}
+  .gl-form-label{position:relative;left:40px;}
+ -->
+
  <xsl:template match="//input[@type[contains(., 'submit') or contains(., 'button')]]">
       <input>
         <xsl:copy-of select="attribute::*[not(name()='class')]" />
@@ -154,6 +164,32 @@
         </xsl:attribute>
     </input>
   </xsl:template>
+  <xsl:template match="//input[@type[contains(., 'checkbox') or contains(., 'radio')]]">
+      <input>
+        <xsl:copy-of select="attribute::*[not(name()='class')]" />
+        <xsl:attribute name="class"><xsl:value-of select="@class" /> 
+            <xsl:choose><xsl:when test="@type[contains(., 'checkbox')]"> w-checkbox-input gl-checkbox-input</xsl:when>
+            </xsl:choose>
+            <xsl:choose><xsl:when test="@type[contains(., 'radio')]"> w-radio-input gl-radio-input</xsl:when>
+            </xsl:choose>  
+        </xsl:attribute>
+    </input>
+  </xsl:template>
+  <xsl:template match="//label">
+      <label>
+        <xsl:copy-of select="attribute::*[not(name()='class')]" />
+        <xsl:attribute name="class"> gl-form-label</xsl:attribute>
+        <xsl:value-of select="." />
+      </label>
+  </xsl:template>
+  <xsl:template match="//fieldset">
+         <xsl:copy>
+            <xsl:attribute name="class">gl-fieldset</xsl:attribute>
+            <xsl:copy-of select="@*" />
+            <xsl:apply-templates />
+        </xsl:copy>
+  </xsl:template>
+  
 <!--
 html element ->
 
