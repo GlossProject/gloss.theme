@@ -99,11 +99,14 @@
                 css:content="#content" 
                  />
             </rules>
-            <drop css:theme-children=".gl-drop" />
-            <drop css:theme-children=".gl-front-drop" 
+            <!-- drop rules -->
+            <drop css:theme=".gl-drop" />
+            <drop css:theme=".gl-front-drop" 
               css:if-content=".section-front-page"/>
-            <drop css:theme-children=".gl-inner-drop" 
+            <drop css:theme=".gl-inner-drop" 
               css:if-not-content=".section-front-page"/>
+            <!-- end of drop rules -->  
+            
             <before css:theme-children=".gl-edit-bar" 
                 css:content="#edit-bar" />
             <replace css:theme-children=".gl-content" 
@@ -127,11 +130,77 @@
             <a href="{$portal_url}/test_rendering" 
                 style="position:fixed;color:#ededed;font-size:10px;z-index:2000;padding:4px;background:red;opacity:.5;">test render</a>
           </before>
+          <!-- include shortcut to edit front page -->
           <before css:theme-children="body"
               css:if-content="body.userrole-manager">
             <a href="{$portal_url}/front-page/edit" 
                 style="position:fixed;left:70px;color:#ededed;font-size:10px;z-index:2000;padding:4px;background:green;opacity:.5;">edit front</a>
           </before>
+
+
+          <!-- =========== two and three column layout support ======== -->
+          <!-- two column - right column -->
+          <rules if-content="//*[@id='portal-column-two'] and not(//*[@id='portal-column-one'])">
+                  
+                       <replace css:theme-children=".gl-two-column-layout .gl-second-column"
+                       css:content="#portal-column-two"
+                    />
+                    
+                    <drop css:theme=".gl-one-column-layout" />
+                    <drop css:theme=".gl-two-column-layout.gl-left-column" />
+                    <drop css:theme=".gl-three-column-layout" />
+                    
+                  
+            </rules>
+            <!-- <rules  if-content="//*[@id='portal-column-two'] and not(//*[@id='portal-column-one'])">
+             
+                       <replace css:theme-children=".two-column-layout.right-column .second-column">
+                           <xsl:for-each css:select="#portal-column-two .portletHeader">
+                           <h1 class="sidebar-heading rp-more-space"><xsl:value-of select=".//a/text()" /></h1>
+                           </xsl:for-each>
+                           <xsl:for-each css:select="#portal-column-two .navTreeItem">
+                           <h4 class="portlet-content"><a class="sidebar-link"><xsl:attribute name="href"><xsl:value-of select=".//a/@href" /></xsl:attribute>
+                           <xsl:value-of select=".//span/text()" /></a></h4>
+                           </xsl:for-each>
+                       </replace>                       
+                    <drop css:theme=".gl-one-column-layout" />
+                    <drop css:theme=".gl-three-column-layout" />
+                    <drop css:theme=".gl-two-column-layout.gl-left-column" />
+            </rules> -->
+            <!-- two column left column -->  
+            <rules if-content="//*[@id='portal-column-one'] and not(//*[@id='portal-column-two'])">
+                  
+                       <replace css:theme-children=".gl-two-column-layout .gl-first-column"
+                       css:content="#portal-column-one"
+                    />
+                    
+                    <drop css:theme=".gl-one-column-layout" />
+                    <drop css:theme=".gl-two-column-layout.gl-right-column" />
+                    <drop css:theme=".gl-three-column-layout" />
+                    
+                  
+            </rules>
+           
+            <!-- full width NO columns --> 
+              <rules if-content="not(//*[@id='portal-column-one']) and not(//*[@id='portal-column-two'])">
+                  
+                    <drop css:theme=".gl-three-column-layout" />
+                    <drop css:theme=".gl-two-column-layout" />
+              </rules>
+
+             <!-- three column -->
+             <rules if-content="//*[@id='portal-column-one'] and //*[@id='portal-column-two']">
+                
+                 <replace css:theme-children=".gl-three-column-layout .gl-first-column"
+                       css:content-children="#portal-column-one" />
+                 <replace css:theme-children=".gl-three-column-layout .gl-second-column"
+                       css:content-children="#portal-column-two" />
+                    <drop css:theme=".gl-one-column-layout" />
+                    <drop css:theme=".gl-two-column-layout" />
+
+             </rules>
+             
+          <!-- special support for plone.app.debugtoolbar -->
           <before css:theme-children="body" css:content="#debug-toolbar-trigger" />
           <before css:theme-children="body" css:content="#debug-toolbar" />
 
