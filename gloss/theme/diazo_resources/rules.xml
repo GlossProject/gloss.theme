@@ -34,6 +34,8 @@
         <!-- Move inline scripts in content to end of body -->
         <drop css:content="body script" />
         <after css:theme-children="html body" css:content="html body script" method="raw" />
+        <replace css:theme-children=".gl-portlet-manage"
+               css:content="#portal-columns" />
 
       
        <!--
@@ -60,6 +62,9 @@
             .gl-content-byline
             .gl-content-description
             .gl-content-title
+            .gl-footer
+            .gl-below-content
+            .gl-drop
 
             To change your theme simply change theme entry
             to the url of your site (or use a local index.html)
@@ -91,11 +96,15 @@
                 css:content="#content" 
                  />
             </rules>
+            <drop css:theme-children=".gl-drop" />
             <before css:theme-children=".gl-edit-bar" 
                 css:content="#edit-bar" />
             <replace css:theme-children=".gl-content" 
                 css:content="#content" />
-            
+            <replace css:theme-children=".gl-below-content"
+              css:content-children="#viewlet-below-content"/>
+            <replace css:theme-children=".gl-footer"
+              css:content-children="#portal-footer"/>
             <replace css:theme-children=".gl-content-byline" 
                 css:content="#plone-document-byline" />
             <replace css:theme-children=".gl-content-description" 
@@ -126,6 +135,18 @@
 
     </rules>
  
+ <xsl:template match="//input[@type[contains(., 'submit') or contains(., 'button')]]">
+      <input>
+        <xsl:copy-of select="attribute::*[not(name()='class')]" />
+        <xsl:attribute name="class"><xsl:value-of select="@class" /> btn button gl-button
+            <xsl:choose><xsl:when test="@class[contains(., 'destructive')]">btn-danger gl-hot-button</xsl:when>
+            <xsl:when test="@class[contains(., 'standalone')]">btn-info gl-cooler-button</xsl:when>
+            <xsl:when test="@class[contains(., 'context')]">btn-primary gl-cool-button</xsl:when>
+            <xsl:otherwise>btn-default gl-default-button</xsl:otherwise>
+            </xsl:choose>  
+        </xsl:attribute>
+    </input>
+  </xsl:template>
 <!--
 html element ->
 
