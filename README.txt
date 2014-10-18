@@ -14,18 +14,39 @@ So class will be always named in the manner below::
 
 classes provided::
 
+            core classes:
+            ==============
             a.gl-logo (must be placed on an a tag, this is to preserve home link)
+            {gl namespace}-{what}-n{qualifier}
             .gl-menu-link - add style to individual menu items
-            .gl-inner-only - only show on inner pages
-            .gl-front-only - only show on the frontpage
-            .gl-edit-bar - adds an edit bar
+            .gl-inner-only - (deprecated will be removed soon) only show on inner pages
+            .gl-front-only - (deprecated will be removed soon) only show on the frontpage
+            .gl-editbar - adds an edit bar
             .gl-content - inserts the site content
             .gl-content-body
             .gl-content-byline
             .gl-content-description
             .gl-content-title
+            .gl-footer
+            .gl-below-content
+
+            drop classes:
+            ==============
+            .gl-drop
+            .gl-front-drop
+            .gl-inner-drop
+
+            layout classes:
+            ================
+            .gl-one-column-layout
+            .gl-two-column-layout.gl-right-column
+            .gl-two-column-layout.gl-left-column
+            .gl-three-column-layout
             
-For the most up-to-date listing of classes visit http://tinyurl.com/gloss-docs
+                 .gl-second-column
+                 .gl-first-column
+            
+For the most up-to-date reference documentation visit http://tinyurl.com/gloss-docs
 
 
 

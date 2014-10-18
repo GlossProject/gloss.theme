@@ -51,6 +51,8 @@
         <!--
             classes provided:
             #################
+            core classes:
+            ==============
             a.gl-logo (must be placed on an a tag, this is to preserve home link)
             {gl namespace}-{what}-n{qualifier}
             .gl-menu-link - add style to individual menu items
@@ -64,9 +66,23 @@
             .gl-content-title
             .gl-footer
             .gl-below-content
+
+            drop classes:
+            ==============
             .gl-drop
             .gl-front-drop
             .gl-inner-drop
+
+            layout classes:
+            ================
+            .gl-one-column-layout
+            .gl-two-column-layout.gl-right-column
+            .gl-two-column-layout.gl-left-column
+            .gl-three-column-layout
+            
+                 .gl-second-column
+                 .gl-first-column
+
 
 
             To change your theme simply change theme entry
@@ -106,7 +122,7 @@
             <drop css:theme=".gl-inner-drop" 
               css:if-not-content=".section-front-page"/>
             <!-- end of drop rules -->  
-            
+
             <before css:theme-children=".gl-edit-bar" 
                 css:content="#edit-bar" />
             <replace css:theme-children=".gl-content" 
