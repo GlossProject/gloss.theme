@@ -39,5 +39,134 @@
 
      <xi:include href="gloss.xml"/>
 </rules>
-<xi:include href="gloss-inline-xsl.xml"/>
+ <!-- necessary xsl transforms for webflow compatibility -->
+ <!--
+  add extra styles somewhere
+  .gl-fieldset {
+    position:relative;
+   }
+  .gl-checkbox-input{position:relative;left:40px}
+  .gl-form-label{position:relative;left:40px;}
+ -->
+<!-- ** custom navbar compatible with webflow ** -->
+     <xsl:template match="div[@id='content']">
+         <xsl:copy>
+            <xsl:attribute name="class">gl-content</xsl:attribute>
+            <xsl:copy-of select="@*" />
+            <xsl:apply-templates />
+        </xsl:copy>
+        </xsl:template>
+        <replace css:theme-children="nav.gl-menu">
+          <xsl:for-each css:select="ul#portal-globalnav li">
+            <a><xsl:attribute name="class">w-nav-link gl-menu-link
+              </xsl:attribute><xsl:attribute name="href"><xsl:value-of select="./a/@href" /></xsl:attribute>
+              <xsl:copy-of select="./a/text()" /></a>
+            </xsl:for-each>
+        </replace>
+        
+ <xsl:template match="//input[@type[contains(., 'submit') or contains(., 'button')]]">
+      <input>
+        <xsl:copy-of select="attribute::*[not(name()='class')]" />
+        <xsl:attribute name="class"><xsl:value-of select="@class" /> btn button gl-button
+            <xsl:choose><xsl:when test="@class[contains(., 'destructive')]">btn-danger gl-hot-button</xsl:when>
+            <xsl:when test="@class[contains(., 'standalone')]">btn-info gl-cooler-button</xsl:when>
+            <xsl:when test="@class[contains(., 'context')]">btn-primary gl-cool-button</xsl:when>
+            <xsl:otherwise>btn-default gl-default-button</xsl:otherwise>
+            </xsl:choose>  
+        </xsl:attribute>
+    </input>
+  </xsl:template>
+  <xsl:template match="//input[@type[contains(., 'checkbox') or contains(., 'radio')]]">
+      <input>
+        <xsl:copy-of select="attribute::*[not(name()='class')]" />
+        <xsl:attribute name="class"><xsl:value-of select="@class" /> 
+            <xsl:choose><xsl:when test="@type[contains(., 'checkbox')]"> w-checkbox-input gl-checkbox-input</xsl:when>
+            </xsl:choose>
+            <xsl:choose><xsl:when test="@type[contains(., 'radio')]"> w-radio-input gl-radio-input</xsl:when>
+            </xsl:choose>  
+        </xsl:attribute>
+    </input>
+  </xsl:template>
+  <xsl:template match="//label">
+      <label>
+        <xsl:copy-of select="attribute::*[not(name()='class')]" />
+        <xsl:attribute name="class"> gl-form-label</xsl:attribute>
+        <xsl:value-of select="." />
+      </label>
+  </xsl:template>
+  <xsl:template match="//fieldset">
+         <xsl:copy>
+            <xsl:attribute name="class">gl-fieldset</xsl:attribute>
+            <xsl:copy-of select="@*" />
+            <xsl:apply-templates />
+        </xsl:copy>
+  </xsl:template>
+  
+  <!-- plone.app.toolbar support -->
+  <before theme-children="/html/body"
+    content="//div[@data-iframe='plone-toolbar']" />
+<!-- Then, in case we are not copying all resources from Plone (content) into the theme we have to include the toolbar's resources and its dependencies as well:
+-->
+<before theme-children="/html/head">
+    <link rel="stylesheet" type="text/css"
+        href="++resource++plone.app.widgets.css"/>
+    <link rel="stylesheet" type="text/css"
+        href="++resource++plone.app.toolbar_init.css"/>
+    <link rel="stylesheet" type="text/css"
+        href="++resource++plone.app.toolbar.css"/>
+    <script type="text/javascript"
+        src="++resource++plone.app.jquery.js"></script>
+    <script type="text/javascript"
+        src="++resource++plone.app.toolbar_init.js"></script>
+    <script type="text/javascript"
+        src="++resource++plone.app.toolbar.js"></script>
+    <script type="text/javascript"
+        src="++resource++plone.app.widgets.js"></script>
+</before>
+<!-- Also, in order to correctly support updating a page after using Edit, you must ensure that the element #portal-column-content exists within your theme. In short, as with Plone's default theme, this element should correspond to the main content column. It will be repopulated with updated content after an edit action takes place via the toolbar. A rule similar to this is needed - in this case, the entire element is placed into the theme: -->
+
+<replace css:theme-children="#content article"
+    css:content="#portal-column-content" />
+<!--
+html element ->
+
+Unordered lists
+ul -> gl-ul
+contained li -> gl-ul-li
+
+Ordered lists
+ol -> gl-ol
+contained li -> gl-ol-li
+-->
+<!-- not being used at the moment -->
+<!--
+         <xsl:template match="ul">
+         <xsl:copy>
+            <xsl:attribute name="class">gl-ul</xsl:attribute>
+            <xsl:copy-of select="@*" />
+            <xsl:apply-templates />
+        </xsl:copy>
+        </xsl:template>
+         <xsl:template match="ol">
+         <xsl:copy>
+            <xsl:attribute name="class">gl-ol</xsl:attribute>
+            <xsl:copy-of select="@*" />
+            <xsl:apply-templates />
+        </xsl:copy>
+        </xsl:template>
+         <xsl:template match="ol/li">
+         <xsl:copy>
+            <xsl:attribute name="class">gl-ol-li</xsl:attribute>
+            <xsl:copy-of select="@*" />
+            <xsl:apply-templates />
+        </xsl:copy>
+        </xsl:template>
+         <xsl:template match="ul/li">
+         <xsl:copy>
+            <xsl:attribute name="class">gl-ul-li</xsl:attribute>
+            <xsl:copy-of select="@*" />
+            <xsl:apply-templates />
+        </xsl:copy>
+        </xsl:template>
+ -->
 </rules>
