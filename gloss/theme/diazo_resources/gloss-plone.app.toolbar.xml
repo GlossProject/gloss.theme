@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules
+    xmlns="http://namespaces.plone.org/diazo"
+    xmlns:css="http://namespaces.plone.org/diazo/css"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+      
+  <!-- plone.app.toolbar support -->
+  <before theme-children="/html/body"
+    content="//div[@data-iframe='plone-toolbar']" />
+<!-- Then, in case we are not copying all resources from Plone (content) into the theme we have to include the toolbar's resources and its dependencies as well:
+-->
+<before theme-children="/html/head">
+    <link rel="stylesheet" type="text/css"
+        href="++resource++plone.app.widgets.css"/>
+    <link rel="stylesheet" type="text/css"
+        href="++resource++plone.app.toolbar_init.css"/>
+    <link rel="stylesheet" type="text/css"
+        href="++resource++plone.app.toolbar.css"/>
+    <script type="text/javascript"
+        src="++resource++plone.app.jquery.js"></script>
+    <script type="text/javascript"
+        src="++resource++plone.app.toolbar_init.js"></script>
+    <script type="text/javascript"
+        src="++resource++plone.app.toolbar.js"></script>
+    <script type="text/javascript"
+        src="++resource++plone.app.widgets.js"></script>
+</before>
+<!-- Also, in order to correctly support updating a page after using Edit, you must ensure that the element #portal-column-content exists within your theme. In short, as with Plone's default theme, this element should correspond to the main content column. It will be repopulated with updated content after an edit action takes place via the toolbar. A rule similar to this is needed - in this case, the entire element is placed into the theme: -->
+
+</rules>

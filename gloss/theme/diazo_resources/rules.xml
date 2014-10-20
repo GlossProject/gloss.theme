@@ -2,7 +2,9 @@
 <rules
     xmlns="http://namespaces.plone.org/diazo"
     xmlns:css="http://namespaces.plone.org/diazo/css"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    >
 
     <!-- Apply the following rules to standard Plone pages -->
     <rules css:if-content="#visual-portal-wrapper">
@@ -34,7 +36,7 @@
         <!-- Move inline scripts in content to end of body -->
         <drop css:content="body script" />
         <after css:theme-children="html body" css:content="html body script" method="raw" />
-        
+
      <xi:include href="gloss.xml"/>
 </rules>
 <xi:include href="gloss-inline-xsl.xml"/>
