@@ -99,6 +99,12 @@
             <a href="{$portal_url}/front-page/edit" 
                 style="position:fixed;left:70px;color:#ededed;font-size:10px;z-index:2000;padding:4px;background:green;opacity:.5;">edit front</a>
           </before>
+          <!-- include shortcut to template control panel page -->
+          <before css:theme-children="body"
+              css:if-content="body.userrole-manager">
+            <a href="{$portal_url}/theming-controlpanel" 
+                style="position:fixed;left:140px;color:#ededed;font-size:10px;z-index:2000;padding:4px;background:blue;opacity:.5;">theme</a>
+          </before>
 
 
           <!-- =========== two and three column layout support ======== -->
