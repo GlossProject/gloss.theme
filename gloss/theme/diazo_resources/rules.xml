@@ -56,13 +56,21 @@
             <xsl:apply-templates />
         </xsl:copy>
         </xsl:template>
+      
         <replace css:theme-children="nav.gl-menu">
           <xsl:for-each css:select="ul#portal-globalnav li">
-            <a><xsl:attribute name="class">w-nav-link gl-menu-link
+            <a><xsl:attribute name="class">w-nav-link gl-menu-link <xsl:choose><xsl:when test="@class[contains(., 'selected')]">active</xsl:when></xsl:choose>
               </xsl:attribute><xsl:attribute name="href"><xsl:value-of select="./a/@href" /></xsl:attribute>
               <xsl:copy-of select="./a/text()" /></a>
             </xsl:for-each>
         </replace>
+       <!-- nav compatible with menus that use li tags -->
+       <replace css:theme-children="nav.gl-menu-li-type .navbar-nav">
+          <xsl:for-each css:select="ul#portal-globalnav > li">
+            <li><a><xsl:attribute name="class">gl-menu-link <xsl:choose><xsl:when test="@class[contains(., 'selected')]">active</xsl:when></xsl:choose>
+              </xsl:attribute><xsl:attribute name="href"><xsl:value-of select="./a/@href" /></xsl:attribute><xsl:copy-of select="./a/text()" /></a></li>
+            </xsl:for-each>
+      </replace>
         
  <xsl:template match="//input[@type[contains(., 'submit') or contains(., 'button')]]">
       <input>
