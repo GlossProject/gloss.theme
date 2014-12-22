@@ -22,7 +22,8 @@
             .gl-menu-link - add style to individual menu items
             .gl-inner-only - (deprecated will be removed soon) only show on inner pages
             .gl-front-only - (deprecated will be removed soon) only show on the frontpage
-            .gl-editbar - adds an edit bar
+            .gl-breadcrumbs - adds breadcrumbs to an element
+            .gl-edit-bar - adds an edit bar
             .gl-content - inserts the site content
             .gl-content-body
             .gl-content-byline
@@ -65,6 +66,8 @@
             
             <before css:theme-children=".gl-edit-bar" 
                 css:content="#edit-bar" />
+            <before css:theme-children=".gl-breadcrumbs" 
+                css:content="#portal-breadcrumbs" />
             <replace css:theme-children=".gl-content" 
                 css:content="#content" />
             <replace css:theme-children=".gl-below-content"
