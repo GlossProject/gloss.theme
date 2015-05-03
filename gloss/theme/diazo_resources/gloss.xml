@@ -34,6 +34,8 @@
             .gl-drop
             .gl-front-drop
             .gl-inner-drop
+            .gl-not-authenticated-drop
+            .gl-not-manager-drop
 
 
             To change your theme simply change theme entry
@@ -62,6 +64,12 @@
               css:if-content=".section-front-page" method="raw"/>
             <drop css:theme=".gl-inner-drop" 
               css:if-not-content=".section-front-page" method="raw"/>
+            <!-- auth based drop rules -->
+            <drop css:theme=".gl-not-authenticated-drop"
+           css:if-not-content=".userrole-authenticated" />
+           
+            <drop css:theme=".gl-not-manager-drop"
+           css:if-not-content=".userrole-manager" />
             <!-- end of drop rules -->  
             
             <before css:theme-children=".gl-edit-bar" 
