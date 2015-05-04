@@ -36,6 +36,7 @@
             .gl-inner-drop
             .gl-not-authenticated-drop
             .gl-not-manager-drop
+            .gl-user-menu
 
 
             To change your theme simply change theme entry
@@ -72,6 +73,8 @@
            css:if-not-content=".userrole-manager" />
             <!-- end of drop rules -->  
             
+            <before css:theme-children=".gl-user-menu"
+          css:content="#portal-personaltools-wrapper" />
             <before css:theme-children=".gl-edit-bar" 
                 css:content="#edit-bar" />
             <before css:theme-children=".gl-breadcrumbs" 
