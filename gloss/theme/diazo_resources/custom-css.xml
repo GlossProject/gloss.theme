@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules
+    xmlns="http://namespaces.plone.org/diazo"
+    xmlns:css="http://namespaces.plone.org/diazo/css"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+    <before css:theme-children="html head"> 
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+    </before>
+        
+    <after css:theme-children="html head"> 
+      <style>
+      a.w-nav-link.gl-menu-link,a:visited.w-nav-link.gl-menu-link {
+          /* color: white; */
+        }
+        a:hover.w-nav-link.gl-menu-link {
+          /* color: black; */
+        }
+      /* uncomment to adjust content font size */
+      /* body #content {
+         font-size: 100%;
+      } */
+    </style>
+   </after>
+
+</rules>
