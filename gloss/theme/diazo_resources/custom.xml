@@ -5,6 +5,7 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xi="http://www.w3.org/2001/XInclude">
     
+    <!-- for power users -->
     <!-- add your customizations here -->
     <!-- <drop css:content=".documentFirstHeading" /> -->
     
