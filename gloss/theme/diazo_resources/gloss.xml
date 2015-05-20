@@ -165,6 +165,82 @@
           <!-- special support for plone.app.debugtoolbar -->
           <before css:theme-children="body" css:content="#debug-toolbar-trigger" />
           <before css:theme-children="body" css:content="#debug-toolbar" />
+          
+          <!-- ** custom navbar compatible with webflow ** -->
+     <xsl:template match="div[@id='content']">
+         <xsl:copy>
+            <xsl:attribute name="class">gl-content</xsl:attribute>
+            <xsl:copy-of select="@*" />
+            <xsl:apply-templates />
+        </xsl:copy>
+        </xsl:template>
+        <replace css:theme-children="nav.gl-menu">
+          <xsl:for-each css:select="ul#portal-globalnav li">
+            <!-- add classes from the portal-globalnav li to our a tag -->
+            <a><xsl:attribute name="class"><xsl:value-of select="./@class" /> w-nav-link gl-menu-link
+              </xsl:attribute><xsl:attribute name="href"><xsl:value-of select="./a/@href" /></xsl:attribute>
+              <xsl:copy-of select="./a/text()" /></a>
+            </xsl:for-each>
+        </replace>
+       <!-- nav compatible with menus that use li tags -->
+       <replace css:theme-children="nav.gl-menu-li-type .navbar-nav">
+          <xsl:for-each css:select="ul#portal-globalnav > li">
+            <li><a><xsl:attribute name="class">gl-menu-link <xsl:choose><xsl:when test="@class[contains(., 'selected')]">active</xsl:when></xsl:choose>
+              </xsl:attribute><xsl:attribute name="href"><xsl:value-of select="./a/@href" /></xsl:attribute><xsl:copy-of select="./a/text()" /></a></li>
+            </xsl:for-each>
+      </replace>
+        
+ <xsl:template match="//input[@type[contains(., 'submit') or contains(., 'button')]]">
+      <input>
+        <xsl:copy-of select="attribute::*[not(name()='class')]" />
+        <xsl:attribute name="class"><xsl:value-of select="@class" /> btn button gl-button
+            <xsl:choose><xsl:when test="@class[contains(., 'destructive')]">btn-danger gl-hot-button</xsl:when>
+            <xsl:when test="@class[contains(., 'standalone')]">btn-info gl-cooler-button</xsl:when>
+            <xsl:when test="@class[contains(., 'context')]">btn-primary gl-cool-button</xsl:when>
+            <xsl:otherwise>btn-default gl-default-button</xsl:otherwise>
+            </xsl:choose>  
+        </xsl:attribute>
+    </input>
+  </xsl:template>
+  <xsl:template match="//input[@type[contains(., 'checkbox') or contains(., 'text') or contains(., 'password') or contains(., 'radio')]]">
+      <input>
+        <xsl:copy-of select="attribute::*[not(name()='class')]" />
+        <xsl:attribute name="class"><xsl:value-of select="@class" /> 
+            <xsl:choose><xsl:when test="@type[contains(., 'checkbox')]"> 
+             w-checkbox-input
+            </xsl:when>
+            </xsl:choose>
+            <xsl:choose><xsl:when test="@type[contains(., 'radio')]"> 
+            w-radio-input
+            </xsl:when>
+            </xsl:choose>
+            <xsl:choose><xsl:when test="@type[contains(., 'password')]"> 
+            w-input
+            </xsl:when>
+            </xsl:choose>
+            <xsl:choose><xsl:when test="@type[contains(., 'text')]"> 
+            w-input
+            </xsl:when>
+            </xsl:choose>
+        </xsl:attribute>
+    </input>
+</xsl:template>
+
+  <xsl:template match="//label">
+      <label>
+        <xsl:copy-of select="attribute::*[not(name()='class')]" />
+        <xsl:attribute name="class"> gl-form-label</xsl:attribute>
+        <xsl:value-of select="." />
+      </label>
+  </xsl:template>
+  <xsl:template match="//fieldset">
+         <xsl:copy>
+            <xsl:attribute name="class">gl-fieldset</xsl:attribute>
+            <xsl:copy-of select="@*" />
+            <xsl:apply-templates />
+        </xsl:copy>
+  </xsl:template>
+
 
           <!-- end of gloss rules -->
 </rules>
