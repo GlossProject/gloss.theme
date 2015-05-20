@@ -122,8 +122,10 @@
                        css:content-children="#portal-column-two"
                     />
                     
+                    
                     <drop css:theme=".gl-one-column-layout" />
                     <drop css:theme=".gl-two-column-layout.gl-left-column" />
+                    <drop css:theme=".gl-two-column-layout.gl-left-sidebar" />
                     <drop css:theme=".gl-three-column-layout" />
                     
                   
@@ -138,6 +140,7 @@
                     
                     <drop css:theme=".gl-one-column-layout" />
                     <drop css:theme=".gl-two-column-layout.gl-right-column" />
+                    <drop css:theme=".gl-two-column-layout.gl-right-sidebar" />
                     <drop css:theme=".gl-three-column-layout" />
                     
                   
