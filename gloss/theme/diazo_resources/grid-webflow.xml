@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules
+    xmlns="http://namespaces.plone.org/diazo"
+    xmlns:css="http://namespaces.plone.org/diazo/css"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+<!-- override the grid -->
+ <replace content="//div[@id='virtual-portal-wrapper']/*/div[contains(@class,'cell')]/@class">
+    <xsl:attribute name="class">
+    <xsl:if test='contains(current(),"width-3:4")'> w-col w-col-9 </xsl:if>
+    <xsl:if test='contains(current(),"width-2:3")'> w-col w-col-8 </xsl:if>
+    <xsl:if test='contains(current(),"width-1:2")'> w-col w-col-6 </xsl:if>
+    <xsl:if test='contains(current(),"width-1:3")'> w-col w-col-4 </xsl:if>
+    <xsl:if test='contains(current(),"width-1:4")'> w-col w-col-3 </xsl:if>
+    <xsl:if test='contains(current(),"width-full")'> w-col w-col-12 </xsl:if>
+
+    <xsl:if test='contains(current(),"width-15")'> w-col w-col-11 </xsl:if>
+    <xsl:if test='contains(current(),"width-14")'> w-col w-col-10 </xsl:if>
+    <xsl:if test='contains(current(),"width-13")'> w-col w-col-10 </xsl:if>
+    <xsl:if test='contains(current(),"width-12")'> w-col w-col-9 </xsl:if>
+    <xsl:if test='contains(current(),"width-11")'> w-col w-col-8 </xsl:if>
+    <xsl:if test='contains(current(),"width-10")'> w-col w-col-8 </xsl:if>
+    <xsl:if test='contains(current(),"width-9")'> w-col w-col-7 </xsl:if>
+    <xsl:if test='contains(current(),"width-8")'> w-col w-col-6 </xsl:if>
+    <xsl:if test='contains(current(),"width-7")'> w-col w-col-5 </xsl:if>
+    <xsl:if test='contains(current(),"width-6")'> w-col w-col-4 </xsl:if>
+    <xsl:if test='contains(current(),"width-5")'> w-col w-col-4 </xsl:if>
+    <xsl:if test='contains(current(),"width-4")'> w-col w-col-3 </xsl:if>
+    <xsl:if test='contains(current(),"width-3")'> w-col w-col-2 </xsl:if>
+    <xsl:if test='contains(current(),"width-2")'> w-col w-col-1 </xsl:if>
+    <xsl:if test='contains(current(),"width-1z")'> w-col w-col-1 </xsl:if>
+    </xsl:attribute>
+ </replace>
+ </rules>
