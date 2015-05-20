@@ -39,8 +39,10 @@ classes provided::
             layout classes:
             ================
             .gl-one-column-layout
-            .gl-two-column-layout.gl-right-column
-            .gl-two-column-layout.gl-left-column
+            .gl-two-column-layout.gl-right-sidebar
+            .gl-two-column-layout.gl-left-sidebar
+            .gl-two-column-layout.gl-right-column (deprecated will be removed soon)
+            .gl-two-column-layout.gl-left-column (deprecated will be removed soon)
             .gl-three-column-layout
             
                  .gl-second-column
