@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.6.0'
+version = '0.6.1'
 
 setup(name='gloss.theme',
       version=version,
