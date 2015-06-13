@@ -1,6 +1,27 @@
 Changelog
 ========
 
+0.7.0
+------
+
+- there are enough changes to warrant bumping to 0.7.0
+
+- added jquery migrate to the registry
+
+- cssregistry now disables public.css and reset.css when theme is active
+
+- removed call to bootstrap css also added sensible webflow defaults
+
+- added rules to inject webflow current on the menu when a section is active
+
+- Update custom.xml
+
+- Create grid-webflow.xml
+
+- Update README.rst
+
+- added support for gl-sidebar-left and gl-sidebar-right
+
 
 0.5.4
 -------------------
@@ -16,3 +37,5 @@ Changelog
 -------------------
 
 - Initial release
+
+

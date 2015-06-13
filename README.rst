@@ -48,7 +48,7 @@ classes provided::
                  .gl-second-column
                  .gl-first-column
             
-For the most up-to-date reference documentation visit http://tinyurl.com/gloss-docs
+For the most up-to-date reference documentation visit http://the-gloss-project.readthedocs.org/en/latest/
 
 
 
