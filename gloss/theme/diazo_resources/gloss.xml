@@ -180,7 +180,7 @@
         <replace css:theme-children="nav.gl-menu">
           <xsl:for-each css:select="ul#portal-globalnav li">
             <!-- add classes from the portal-globalnav li to our a tag -->
-            <a><xsl:attribute name="class"><xsl:value-of select="./@class" /> w-nav-link gl-menu-link
+            <a><xsl:attribute name="class"><xsl:value-of select="./@class" /> w-nav-link nav-link gl-menu-link <xsl:choose><xsl:when test="@class[contains(., 'selected')]">w--current</xsl:when></xsl:choose>
               </xsl:attribute><xsl:attribute name="href"><xsl:value-of select="./a/@href" /></xsl:attribute>
               <xsl:copy-of select="./a/text()" /></a>
             </xsl:for-each>
