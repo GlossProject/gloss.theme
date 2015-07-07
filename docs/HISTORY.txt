@@ -1,6 +1,11 @@
 Changelog
 ========
 
+0.7.1
+------
+
+- added support for webflow dropdown/webcouturier.dropdownmenu menus
+
 0.7.0
 ------
 
