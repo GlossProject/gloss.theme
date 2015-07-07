@@ -177,12 +177,30 @@
             <xsl:apply-templates />
         </xsl:copy>
         </xsl:template>
-        <replace css:theme-children="nav.gl-menu">
-          <xsl:for-each css:select="ul#portal-globalnav li">
+        <replace css:theme-children="nav.gl-menu"> <!-- find any nav with a .gl-menu and fill generate a menu with a tags -->
+          <xsl:for-each css:select="ul#portal-globalnav > li">
+            
             <!-- add classes from the portal-globalnav li to our a tag -->
-            <a><xsl:attribute name="class"><xsl:value-of select="./@class" /> w-nav-link nav-link gl-menu-link <xsl:choose><xsl:when test="@class[contains(., 'selected')]">w--current</xsl:when></xsl:choose>
+            <xsl:if test="not(ul)"><a><xsl:attribute name="class"><xsl:value-of select="./@class" /> w-nav-link nav-link gl-menu-link <xsl:choose><xsl:when test="@class[contains(., 'selected')]">w--current</xsl:when></xsl:choose>
               </xsl:attribute><xsl:attribute name="href"><xsl:value-of select="./a/@href" /></xsl:attribute>
               <xsl:copy-of select="./a/text()" /></a>
+              <!-- check for the presence of a ul which means it is a drop down menu -->
+             </xsl:if> 
+             
+             <xsl:if test="ul">
+                    <div class="w-dropdown dropdown" data-delay="0" 
+                                             data-ix="dropdown-on-hover">
+                           <div class="w-dropdown-toggle gl-menu-link">
+                              <div><xsl:copy-of select="./a/text()" /></div><div class="w-icon-dropdown-toggle dropdown-icon"></div>
+                            </div>
+                        <nav class="w-dropdown-list dropdown-list" 
+                              style="opacity: 0; display: none; transition: opacity 500ms;">   
+                        <xsl:for-each css:select="ul > li">
+                        <a class="w-dropdown-link dropdown-link" href="#"><xsl:copy-of select="./a/text()" /></a>                             
+                        </xsl:for-each>
+                        </nav>
+                    </div>
+              </xsl:if>
             </xsl:for-each>
         </replace>
        <!-- nav compatible with menus that use li tags -->
