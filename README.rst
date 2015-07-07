@@ -7,8 +7,11 @@ One of the key tools of the project is a theme which uses special gloss classes.
 
 CONSIDERED ALPHA: This project is considered in an alpha stage. This is because  we still need more comprehensive documentation. We are adding documentation as we go and when it is ready we will move the status to Beta.
 
+For the most up-to-date reference documentation visit http://the-gloss-project.readthedocs.org/en/latest/
+
 Gloss Classes
----------------
+--------------------
+
 The general approach is to use a gl namespace.
 So class will be always named in the manner below::
 
@@ -50,7 +53,3 @@ classes provided::
                  .gl-second-column
                  .gl-first-column
             
-For the most up-to-date reference documentation visit http://the-gloss-project.readthedocs.org/en/latest/
-
-
-
