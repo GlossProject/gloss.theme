@@ -42,5 +42,3 @@ Changelog
 -------------------
 
 - Initial release
-
-

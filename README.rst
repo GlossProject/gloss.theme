@@ -5,7 +5,7 @@ A design process
 
 One of the key tools of the project is a theme which uses special gloss classes.
 
-CONSIDERED ALPHA: This project is considered in an alpha stage. Note because the tools don't work but because of the need for more comprehensive documentation. We are adding documentation as we go and when it is ready we will move the status to Beta.
+CONSIDERED ALPHA: This project is considered in an alpha stage. This is because  we still need more comprehensive documentation. We are adding documentation as we go and when it is ready we will move the status to Beta.
 
 Gloss Classes
 ---------------
