@@ -9,6 +9,8 @@ CONSIDERED ALPHA: This project is considered in an alpha stage. This is because 
 
 For the most up-to-date reference documentation visit http://the-gloss-project.readthedocs.org/en/latest/
 
+See the :doc:`INSTALL`
+
 Gloss Classes
 --------------------
 
