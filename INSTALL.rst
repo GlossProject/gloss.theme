@@ -1,7 +1,9 @@
-::
+You can add `gloss.theme` to your buildout
+ 
+Or
 
-    sudo pip install -U setuptools
-    python bootstrap.py
-    bin/buildout
+run `installer.sh`::
+    
+    sh installer.sh
 
 
