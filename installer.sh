@@ -1,3 +1,4 @@
+sudo apt-get install libxslt-dev libxml2-dev -y
 wget https://launchpad.net/plone/5.0/5.0/+download/Plone-5.0-UnifiedInstaller.tgz
 tar xvfz Plone-5.0-UnifiedInstaller.tgz
 cd Plone-5.0-UnifiedInstaller
@@ -6,3 +7,5 @@ mv buildout-cache/eggs/ ../
 rm -rf buildout-cache
 cd ..
 rm -rf Plone-5.0-UnifiedInstaller*
+pip install -U setuptools
+pip install -U pytz
