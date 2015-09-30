@@ -7,5 +7,7 @@ mv buildout-cache/eggs/ ../
 rm -rf buildout-cache
 cd ..
 rm -rf Plone-5.0-UnifiedInstaller*
-pip install -U setuptools
-pip install -U pytz
+sudo pip install -U setuptools
+sudo pip install -U pytz
+python bootstrap.py
+bin/buildout
