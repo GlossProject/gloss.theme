@@ -19,6 +19,7 @@
   <plone:static
     directory="diazo_resources"
     type="theme"
+    name="gloss"
     />
 
   <browser:jbot
