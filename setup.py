@@ -27,6 +27,7 @@ setup(name='gloss.theme',
       install_requires=[
           'setuptools',
           'z3c.jbot',
+          'plone.app.themingplugins',
           # -*- Extra requirements: -*-
       ],
       entry_points="""
