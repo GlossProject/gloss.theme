@@ -4,6 +4,7 @@ Changelog
 0.8.4
 -----
 
+- Fixed the gloss preview.png
 - Added a .gl-search-box class
 
 0.8.3
