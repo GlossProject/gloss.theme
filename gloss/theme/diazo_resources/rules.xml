@@ -1,103 +1,113 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rules
-    xmlns="http://namespaces.plone.org/diazo"
-    xmlns:css="http://namespaces.plone.org/diazo/css"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xi="http://www.w3.org/2001/XInclude"
-    >
+<?xml version="1.0" encoding="utf-8"?>
+<rules xmlns="http://namespaces.plone.org/diazo"
+       xmlns:css="http://namespaces.plone.org/diazo/css"
+       xmlns:xhtml="http://www.w3.org/1999/xhtml"
+       xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+       xmlns:xi="http://www.w3.org/2001/XInclude">
 
-    <!-- Apply the following rules to standard Plone pages -->
-    <rules css:if-content="#visual-portal-wrapper">
-
-        <theme href="http://glossinator.webflow.com/" />
-        <!-- To change your theme simply change theme entry above
-            to the url of your theme (or use a local index.html)
-            <theme href="http://glossinator.webflow.com/" /> -->
-
-        <!-- Replace title with Plone's page title  -->
-        <replace css:theme="html head title" css:content="html head title" />
-
-        <!-- Drop the favicon spec coming from content; we'll use the one in the theme. -->
-        <drop content="/html/head/link[@rel='shortcut icon']" />
-
-        <!-- Copy base tag from Plone -->
-        <before css:theme-children="html head" css:content="html head base" />
-
-        <!-- Copy link, style, meta tags from Plone head -->
-        <before css:theme-children="html head"
-               content="/html/head/link | /html/head/style | /html/head/meta" />
-
-        <!-- merge classes from Plone body with theme body -->
-        <merge attributes="class" css:theme="body" css:content="body" />
-
-        <!-- Copy script tags from Plone head to end of body -->
-        <after css:theme-children="html body" css:content="html head script" />
-
-        <!-- Move inline scripts in content to end of body -->
-        <drop css:content="body script" />
-        <after css:theme-children="html body" css:content="html body script" method="raw" />
-
- 
-</rules>
-     <xi:include href="gloss-5.0.xml"/>
-     <xi:include href="custom.xml"/>
-     <!-- <xi:include href="grid-webflow.xml"/> -->
- 
- <!-- necessary xsl transforms for webflow compatibility -->
- <!--
-  add extra styles somewhere
-  .gl-fieldset {
-    position:relative;
-   }
-  .gl-checkbox-input{position:relative;left:40px}
-  .gl-form-label{position:relative;left:40px;}
- -->
   
- 
-<!-- Also, in order to correctly support updating a page after using Edit, you must ensure that the element #portal-column-content exists within your theme. In short, as with Plone's default theme, this element should correspond to the main content column. It will be repopulated with updated content after an edit action takes place via the toolbar. A rule similar to this is needed - in this case, the entire element is placed into the theme: -->
+    <xi:include href="++theme++barceloneta/backend.xml" />
+    <xi:include href="gloss.xml" />
+    <xi:include href="grid-webflow.xml" />
+    <xi:include href="custom.xml" />
+        
 
-<replace css:theme-children="#content article"
-    css:content="#portal-column-content" />
-<!--
-html element ->
+  <rules css:if-content="body.viewpermission-view, body.viewpermission-none">
+    <theme href="index.html" />
+  </rules>
+  <notheme css:if-not-content="#visual-portal-wrapper" />
+      
+  <rules css:if-content="#portal-top">
+    <!-- Attributes -->
+    <copy attributes="*" css:theme="html" css:content="html" />
+    <!-- Base tag -->
+    <before css:theme="title" css:content="base" />
+    <!-- Title -->
+    <replace css:theme="title" css:content="title" />
+    <!-- Pull in Plone Meta -->
+    <after css:theme-children="head" css:content="head meta" />
+    <!-- Don't use Plone icons, use the theme's -->
+    <drop css:content="head link[rel='apple-touch-icon']" />
+    <drop css:content="head link[rel='shortcut icon']" />
+    <!-- CSS -->
+    <after css:theme-children="head" css:content="head link" />
+    <!-- Script -->
+    <after css:theme-children="head" css:content="head script" />
+  </rules>
+  
+  <!-- Copy over the id/class attributes on the body tag. This is important for per-section styling -->
+  <copy attributes="*" css:content="body" css:theme="body" />
 
-Unordered lists
-ul -> gl-ul
-contained li -> gl-ul-li
+  <!-- move global nav -->
+  <replace css:theme-children="#mainnavigation" css:content-children="#portal-mainnavigation" method="raw" />
 
-Ordered lists
-ol -> gl-ol
-contained li -> gl-ol-li
--->
-<!-- not being used at the moment -->
-<!--
-         <xsl:template match="ul">
-         <xsl:copy>
-            <xsl:attribute name="class">gl-ul</xsl:attribute>
-            <xsl:copy-of select="@*" />
-            <xsl:apply-templates />
-        </xsl:copy>
-        </xsl:template>
-         <xsl:template match="ol">
-         <xsl:copy>
-            <xsl:attribute name="class">gl-ol</xsl:attribute>
-            <xsl:copy-of select="@*" />
-            <xsl:apply-templates />
-        </xsl:copy>
-        </xsl:template>
-         <xsl:template match="ol/li">
-         <xsl:copy>
-            <xsl:attribute name="class">gl-ol-li</xsl:attribute>
-            <xsl:copy-of select="@*" />
-            <xsl:apply-templates />
-        </xsl:copy>
-        </xsl:template>
-         <xsl:template match="ul/li">
-         <xsl:copy>
-            <xsl:attribute name="class">gl-ul-li</xsl:attribute>
-            <xsl:copy-of select="@*" />
-            <xsl:apply-templates />
-        </xsl:copy>
-        </xsl:template>
- -->
+  <!-- include view @@hero on homepage only -->
+  <after css:theme="#mainnavigation-wrapper" css:content=".principal" href="/@@hero" css:if-content="body.template-document_view.section-front-page" />
+
+  <!-- full-width breadcrumb -->
+  <replace css:content="#viewlet-above-content" css:theme="#above-content" />
+
+  <!-- Central column -->
+  <replace css:theme="#zzzcontent-container" method="raw">
+
+    <xsl:variable name="central">
+      <xsl:if test="//aside[@id='portal-column-one'] and //aside[@id='portal-column-two']">col-xs-12 col-sm-6</xsl:if>
+      <xsl:if test="//aside[@id='portal-column-two'] and not(//aside[@id='portal-column-one'])">col-xs-12 col-sm-9</xsl:if>
+      <xsl:if test="//aside[@id='portal-column-one'] and not(//aside[@id='portal-column-two'])">col-xs-12 col-sm-9</xsl:if>
+      <xsl:if test="not(//aside[@id='portal-column-one']) and not(//aside[@id='portal-column-two'])">col-xs-12 col-sm-12</xsl:if>
+    </xsl:variable>
+
+    <div class="{$central}">
+      <!-- <p class="pull-right visible-xs">
+        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+      </p> -->
+      <div class="row">
+        <div class="col-xs-12 col-sm-12">
+          <xsl:apply-templates css:select="#content" />
+        </div>
+      </div>
+      <footer class="row">
+        <div class="col-xs-12 col-sm-12">
+          <xsl:copy-of css:select="#viewlet-below-content" />
+        </div>
+      </footer>
+    </div>
+  </replace>
+
+  <!-- Alert message -->
+  <replace css:theme-children="#global_statusmessage" css:content-children="#global_statusmessage" />
+  
+  
+  <!-- Left column -->
+  <rules css:if-content="#zzzportal-column-one">
+    <replace css:theme="#column1-container">
+        <div id="sidebar" class="col-xs-6 col-sm-3 sidebar-offcanvas">
+          <aside id="portal-column-one">
+              <xsl:copy-of css:select="#portal-column-one > *" />
+          </aside>
+        </div>
+    </replace>
+  </rules>
+
+  <!-- Right column -->
+  <rules css:if-content="#zzzportal-column-two">
+    <replace css:theme="#column2-container">
+        <div id="sidebar" class="col-xs-6 col-sm-3 sidebar-offcanvas" role="complementary">
+          <aside id="portal-column-two">
+              <xsl:copy-of css:select="#portal-column-two > *" />
+          </aside>
+        </div>
+    </replace>
+  </rules>
+
+  <!-- Content header -->
+  <replace css:theme="#portal-top" css:content-children="#portal-top" />
+
+  <!-- Footer -->
+  <replace css:theme-children="#portal-footer" css:content-children="#portal-footer-wrapper" />
+
+  <!-- toolbar -->
+  <!-- <replace css:theme="#portal-toolbar" css:content-children="#edit-bar" css:if-not-content=".ajax_load" css:if-content=".userrole-authenticated" />
+  -->
+  <replace css:theme="#anonymous-actions" css:content-children="#portal-personaltools-wrapper" css:if-not-content=".ajax_load" css:if-content=".userrole-anonymous" />
 </rules>

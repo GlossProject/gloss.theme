@@ -11,6 +11,14 @@ For the most up-to-date reference documentation visit http://the-gloss-project.r
 
 See the :doc:`INSTALL`
 
+Gloss for Plone 5
+---------------------
+Gloss 0.8.x is for Plone 5.
+
+Gloss for Plone 4.3.x
+-----------------------
+If you are on Plone 4.3.x make sure to use a version less than 0.8.x.
+
 Gloss Classes
 --------------------
 

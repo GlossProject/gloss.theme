@@ -75,7 +75,7 @@
             
             <before css:theme-children=".gl-user-menu"
           css:content="#portal-personaltools-wrapper" />
-            <before css:theme-children=".gl-edit-bar" 
+            <before css:theme-children=".xgl-edit-bar" 
                 css:content="#edit-bar" />
             <before css:theme-children=".gl-breadcrumbs" 
                 css:content="#portal-breadcrumbs" />
@@ -90,29 +90,17 @@
             <replace css:theme-children=".gl-content-description" 
                 css:content-children="#parent-fieldname-description" />
             <replace css:theme-children=".gl-content-title" 
-                css:content-children="#parent-fieldname-title" />
+                css:content-children="h1.documentFirstHeading" />
             <replace css:theme-children=".gl-content-body" 
                 css:content="#content-core" />
           <!-- </rules> -->
-          <!-- include a test rendering -->
-          <before css:theme-children="body"
-              css:if-content="body.userrole-manager">
-            <a href="{$portal_url}/test_rendering" 
-                style="position:fixed;color:#ededed;font-size:10px;z-index:2000;padding:4px;background:red;opacity:.5;">test render</a>
-          </before>
-          <!-- include shortcut to edit front page -->
-          <before css:theme-children="body"
-              css:if-content="body.userrole-manager">
-            <a href="{$portal_url}/front-page/edit" 
-                style="position:fixed;left:70px;color:#ededed;font-size:10px;z-index:2000;padding:4px;background:green;opacity:.5;">edit front</a>
-          </before>
           <!-- include shortcut to template control panel page -->
-          <before css:theme-children="body"
+          <!-- <before css:theme-children="body"
               css:if-content="body.userrole-manager">
             <a href="{$portal_url}/theming-controlpanel" 
-                style="position:fixed;left:140px;color:#ededed;font-size:10px;z-index:2000;padding:4px;background:blue;opacity:.5;">theme</a>
+                style="position:fixed;left:240px;color:#ededed;font-size:20px;z-index:2000;padding:4px;background:blue;opacity:.5;">edit theme</a>
           </before>
-
+          -->
 
           <!-- =========== two and three column layout support ======== -->
           <!-- two column - right column -->
@@ -168,20 +156,31 @@
           <!-- special support for plone.app.debugtoolbar -->
           <before css:theme-children="body" css:content="#debug-toolbar-trigger" />
           <before css:theme-children="body" css:content="#debug-toolbar" />
-          
+        
+        <!-- inject a new class .gl-first-heading class
+         into h1s that have class documentFirstHeading -->
+        <xsl:template css:match="h1.documentFirstHeading">
+        <xsl:copy>
+            <xsl:attribute name="class">gl-first-heading <xsl:value-of select="./@class" /></xsl:attribute>
+            <xsl:copy-of select="@*" />
+            <xsl:apply-templates />
+        </xsl:copy>
+        </xsl:template>
           <!-- ** custom navbar compatible with webflow ** -->
-     <xsl:template match="div[@id='content']">
+        <!-- <xsl:template match="div[@id='content']">
          <xsl:copy>
             <xsl:attribute name="class">gl-content</xsl:attribute>
             <xsl:copy-of select="@*" />
             <xsl:apply-templates />
         </xsl:copy>
         </xsl:template>
+        -->
+        <!-- ** custom navbar compatible with webflow ** -->
         <replace css:theme-children="nav.gl-menu"> <!-- find any nav with a .gl-menu and fill generate a menu with a tags -->
           <xsl:for-each css:select="ul#portal-globalnav > li">
             
             <!-- add classes from the portal-globalnav li to our a tag -->
-            <xsl:if test="not(ul)"><a><xsl:attribute name="class"><xsl:value-of select="./@class" /> w-nav-link nav-link gl-menu-link <xsl:choose><xsl:when test="@class[contains(., 'selected')]">w--current</xsl:when></xsl:choose>
+            <xsl:if test="not(ul)"><a><xsl:attribute name="class"><xsl:value-of select="./@class" /> w-nav-link gl-menu-link <xsl:choose><xsl:when test="@class[contains(., 'selected')]">active</xsl:when></xsl:choose>
               </xsl:attribute><xsl:attribute name="href"><xsl:value-of select="./a/@href" /></xsl:attribute>
               <xsl:copy-of select="./a/text()" /></a>
               <!-- check for the presence of a ul which means it is a drop down menu -->

@@ -1,3 +1,3 @@
-Place Diazo resources here, including rule and theme sources.
-
-It's common to develop these resources interactively via the Plone theming editor (Plone 4.3+), then export the resources and install them here.
+This is the Gloss theme. It defines special classes used for Content Assignment. 
+To learn more about the Gloss and Content Assignment visit:
+http://the-gloss-project.readthedocs.org/
