@@ -1,10 +1,14 @@
 Changelog
 =========
 
-0.8.4
+0.8.5
 -----
 
 - Fixed the gloss preview.png
+
+0.8.4
+-----
+
 - Added a .gl-search-box class
 
 0.8.3
