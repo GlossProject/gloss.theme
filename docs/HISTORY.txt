@@ -1,6 +1,16 @@
 Changelog
 ========
 
+0.8.2
+-----
+
+- it is now possible to use arbitrary references to .gl-first-column .gl-second-column, for supporting the left and right portlets
+
+
+0.8.1
+-----
+- added support for Plone 5 (this version does not work with Plone 4.x)
+
 0.7.1
 ------
 
