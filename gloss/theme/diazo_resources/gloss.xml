@@ -24,6 +24,7 @@
             .gl-front-only - (deprecated will be removed soon) only show on the frontpage
             .gl-breadcrumbs - adds breadcrumbs to an element
             .gl-edit-bar - adds an edit bar
+            .gl-search-box - adds a searchbox
             .gl-content - inserts the site content
             .gl-content-body
             .gl-content-byline
@@ -77,6 +78,8 @@
           css:content="#portal-personaltools-wrapper" />
             <before css:theme-children=".xgl-edit-bar" 
                 css:content="#edit-bar" />
+            <before css:theme-children=".gl-search-box" 
+                css:content="#portal-searchbox" />
             <before css:theme-children=".gl-breadcrumbs" 
                 css:content="#portal-breadcrumbs" />
             <replace css:theme-children=".gl-content" 
