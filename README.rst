@@ -9,14 +9,16 @@ CONSIDERED ALPHA: This project is considered in an alpha stage. This is because 
 
 For the most up-to-date reference documentation visit http://the-gloss-project.readthedocs.org/en/latest/
 
-See the :doc:`INSTALL`
+See the `INSTALL` docs
 
 Gloss for Plone 5
 ---------------------
+
 Gloss 0.8.x is for Plone 5.
 
 Gloss for Plone 4.3.x
 -----------------------
+
 If you are on Plone 4.3.x make sure to use a version less than 0.8.x.
 
 Gloss Classes
@@ -62,4 +64,3 @@ classes provided::
             
                  .gl-second-column
                  .gl-first-column
-            

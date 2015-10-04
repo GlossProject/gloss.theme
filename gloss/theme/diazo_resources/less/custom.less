@@ -1,3 +1,43 @@
 nav#portal-breadcrumbs {
     margin-top: 0;
 }
+.gl-search-box {
+
+  #portal-searchbox {
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: -5px;
+    margin-left: 1em;
+    padding-top: 0;
+    clear: none;
+    float: right;
+    max-width: 50%;
+    width: 250px;
+    white-space: nowrap;
+    .searchSection {
+    display: inherit;
+    }
+    [type="text"] {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    width: calc(180px);
+    display: inline-block;
+  }
+  [type="submit"] {
+    display: none;
+    width: 70px;
+    display: inline-block;
+    margin-left: -1px;
+    vertical-align: top;
+  }
+
+  label {
+    font-size: 86.667%;
+  }
+
+  form > div {font-size: 0;
+            > * {font-size: @plone-font-size-base;} 
+        } 
+  }
+
+}

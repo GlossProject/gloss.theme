@@ -1,11 +1,18 @@
 Changelog
-========
+=========
+
+0.8.4
+-----
+
+- Added a .gl-search-box class
 
 0.8.3
 -----
 
 - Updated the gloss logo that shows in the theme controlpanel
+
 - Added a custom.less file, this is the recommended location for stylesheet based customizations
+
 
 0.8.2
 -----
@@ -15,6 +22,7 @@ Changelog
 
 0.8.1
 -----
+
 - added support for Plone 5 (this version does not work with Plone 4.x)
 
 0.7.1
