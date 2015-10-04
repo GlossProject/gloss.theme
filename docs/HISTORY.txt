@@ -4,6 +4,7 @@ Changelog
 0.8.3
 -----
 
+- Updated the gloss logo that shows in the theme controlpanel
 - Added a custom.less file, this is the recommended location for stylesheet based customizations
 
 0.8.2
