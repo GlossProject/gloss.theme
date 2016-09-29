@@ -4,12 +4,12 @@
     <stylesheet title="" applyPrefix="False" authenticated="False"
     bundle="default" cacheable="True" compression="safe" conditionalcomment=""
     cookable="True" enabled="on"
-    expression="python:context.getPath().endswith("@@theming-controlpanel)" id="reset.css"
+    expression="python:context.getPath().endswith(&quot;@@theming-controlpanel&quot;)" id="reset.css"
     media="screen" rel="stylesheet" rendering="link"/>
     <stylesheet title="" applyPrefix="False" authenticated="False"
     bundle="default" cacheable="True" compression="safe" conditionalcomment=""
     cookable="True" enabled="on"
-    expression="python:context.getPath().endswith("@@theming-controlpanel)" id="public.css"
-    insert-after="base.css" media="screen" rel="stylesheet" rendering="link"/>   
+    expression="python:context.getPath().endswith(&quot;@@theming-controlpanel&quot;)" id="public.css"
+    insert-after="base.css" media="screen" rel="stylesheet" rendering="link"/>  
     
     </object>
