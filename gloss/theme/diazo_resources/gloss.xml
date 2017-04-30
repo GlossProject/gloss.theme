@@ -6,15 +6,15 @@
     xmlns:xi="http://www.w3.org/2001/XInclude">
     <!--
         # Gloss - Dynamic Templating with Class
-        Gloss is a css powered dynamic templating system. It uses special css classes to control the 
+        Gloss is a css powered dynamic templating system. It uses special css classes to control the
         behaviour of your template. In the background a small
         set of diazo rules do the heavy lifting.
 
         For the first version of gloss we have chosen to make the frontpage static. this will be changed over time.
         And also not to use portlets.
         -->
-        <!-- *** gloss classes ** -->
-        <!--
+    <!-- *** gloss classes ** -->
+    <!--
             classes provided:
             #################
             a.gl-logo (must be placed on an a tag, this is to preserve home link)
@@ -39,6 +39,36 @@
             .gl-not-manager-drop
             .gl-user-menu
 
+            form classes:
+
+            .gl-form-button
+            .gl-cancel-form-button
+            .gl-submit-form-button
+            .gl-text-input
+            .gl-radio-input
+            .gl-checkbox-input
+            .gl-select
+            .gl-textarea
+            
+            .gl-required-form-marker (the red dot on form fields that are required)
+
+            message classes:
+            .gl-message
+            .gl-info-message
+            .gl-warning-message
+            .gl-error-message
+
+            .gl-message-label
+            .gl-info-message-label
+            .gl-warning-message-label
+            .gl-error-message-label
+
+
+            misc style classes:
+            <h1>.gl-first-heading
+            .gl-callout (applied to paragraphs that have been given the callout class)
+           
+
 
             To change your theme simply change theme entry
             to the url of your site (or use a local index.html)
@@ -46,230 +76,507 @@
 
 
         -->
-        <!-- gl-portlet-manage NOT documented, still deliberating on this one -->
-        <replace css:theme-children=".gl-portlet-manage"
+    <!-- gl-portlet-manage NOT documented, still deliberating on this one -->
+    <replace css:theme-children=".gl-portlet-manage"
                css:content="#portal-columns" />
-               
-        <!-- logo replace -->
-        <copy attributes="href" css:theme="a.gl-logo" css:content="a#portal-logo" />
-
-        
-       
-          <rules css:if-content=".section-front-page.section-front-page.template-atct_edit.userrole-manager">
-            <replace css:theme-children="body" 
-                css:content="#content" 
+    <!-- logo replace -->
+    <copy attributes="href" css:theme="a.gl-logo" css:content="a#portal-logo" />
+    <!-- main navigation menu -->
+    <rules css:if-content=".section-front-page.section-front-page.template-atct_edit.userrole-manager">
+        <replace css:theme-children="body"
+                css:content="#content"
                  />
-            </rules>
-            <!-- drop rules -->
-            <drop css:theme=".gl-drop" method="raw"/>
-            <drop css:theme=".gl-front-drop" 
+    </rules>
+    <!-- drop rules -->
+    <drop css:theme=".gl-drop" method="raw"/>
+    <drop css:theme=".gl-front-drop"
               css:if-content=".section-front-page" method="raw"/>
-            <drop css:theme=".gl-inner-drop" 
+    <drop css:theme=".gl-inner-drop"
               css:if-not-content=".section-front-page" method="raw"/>
-            <!-- auth based drop rules -->
-            <drop css:theme=".gl-not-authenticated-drop"
+    <!-- auth based drop rules -->
+    <drop css:theme=".gl-not-authenticated-drop"
            css:if-not-content=".userrole-authenticated" />
-           
-            <drop css:theme=".gl-not-manager-drop"
+    <drop css:theme=".gl-not-manager-drop"
            css:if-not-content=".userrole-manager" />
-            <!-- end of drop rules -->  
-            
-            <before css:theme-children=".gl-user-menu"
+    <!-- end of drop rules -->
+    <before css:theme-children=".gl-user-menu"
           css:content="#portal-personaltools-wrapper" />
-            <before css:theme-children=".xgl-edit-bar" 
-                css:content="#edit-bar" />
-            <before css:theme-children=".gl-search-box" 
+    <before css:theme-children=".gl-search-box"
                 css:content="#portal-searchbox" />
-            <before css:theme-children=".gl-breadcrumbs" 
+    <before css:theme-children=".gl-breadcrumbs"
                 css:content="#portal-breadcrumbs" />
-            <replace css:theme-children=".gl-content" 
+    <replace css:theme-children=".gl-content"
                 css:content="#content" />
-            <replace css:theme-children=".gl-below-content"
+    <replace css:theme-children=".gl-below-content"
               css:content-children="#viewlet-below-content"/>
-            <replace css:theme-children=".gl-footer"
+    <replace css:theme-children=".gl-footer"
               css:content-children="#portal-footer"/>
-            <replace css:theme-children=".gl-content-byline" 
+    <replace css:theme-children=".gl-content-byline"
                 css:content="#plone-document-byline" />
-            <replace css:theme-children=".gl-content-description" 
-                css:content-children="#parent-fieldname-description" />
-            <replace css:theme-children=".gl-content-title" 
+    <replace css:theme-children=".gl-content-description"
+                css:content-children=".documentDescription" />
+    <replace css:theme-children=".gl-content-title"
                 css:content-children="h1.documentFirstHeading" />
-            <replace css:theme-children=".gl-content-body" 
+    <replace css:theme-children=".gl-content-body"
                 css:content="#content-core" />
-          <!-- </rules> -->
-          <!-- include shortcut to template control panel page -->
-          <!-- <before css:theme-children="body"
-              css:if-content="body.userrole-manager">
-            <a href="{$portal_url}/theming-controlpanel" 
-                style="position:fixed;left:240px;color:#ededed;font-size:20px;z-index:2000;padding:4px;background:blue;opacity:.5;">edit theme</a>
-          </before>
+    <!-- </rules> -->
+    <!-- include shortcut to template control panel page -->
+    <!-- <before css:theme-children="body"
+              css:if-content="body.userrole-manager"><a href="{$portal_url}/theming-controlpanel"
+                style="position:fixed;left:240px;color:#ededed;font-size:20px;z-index:2000;padding:4px;background:blue;opacity:.5;">edit theme</a></before>
           -->
-          <!-- =========== Standalone columns ============ -->
-          <replace css:theme-children=".gl-first-column"
+    <!-- =========== Standalone columns ============ -->
+    <replace css:theme-children=".gl-first-column"
                        css:content-children="#portal-column-one"
                     />
-          <replace css:theme-children=".gl-second-column"
+    <replace css:theme-children=".gl-second-column"
                        css:content-children="#portal-column-two"
                     />
-          <!-- =========== two and three column layout support ======== -->
-          <!-- two column - right column -->
-          <rules if-content="//*[@id='portal-column-two'] and not(//*[@id='portal-column-one'])">
-                  
-                       <replace css:theme-children=".gl-two-column-layout .gl-second-column"
+    <!-- =========== two and three column layout support ======== -->
+    <!-- two column - right column -->
+    <rules if-content="//*[@id='portal-column-two'] and not(//*[@id='portal-column-one'])">
+        <replace css:theme-children=".gl-two-column-layout .gl-second-column"
                        css:content-children="#portal-column-two"
                     />
-                    
-                    
-                    <drop css:theme=".gl-one-column-layout" />
-                    <drop css:theme=".gl-two-column-layout.gl-left-column" />
-                    <drop css:theme=".gl-two-column-layout.gl-left-sidebar" />
-                    <drop css:theme=".gl-three-column-layout" />
-                    
-                  
-            </rules>
-          
-            <!-- two column left column -->  
-            <rules if-content="//*[@id='portal-column-one'] and not(//*[@id='portal-column-two'])">
-                  
-                       <replace css:theme-children=".gl-two-column-layout .gl-first-column"
+        <drop css:theme=".gl-one-column-layout" />
+        <drop css:theme=".gl-two-column-layout.gl-left-column" />
+        <drop css:theme=".gl-two-column-layout.gl-left-sidebar" />
+        <drop css:theme=".gl-three-column-layout" />
+    </rules>
+    <!-- two column left column -->
+    <rules if-content="//*[@id='portal-column-one'] and not(//*[@id='portal-column-two'])">
+        <replace css:theme-children=".gl-two-column-layout .gl-first-column"
                        css:content-children="#portal-column-one"
                     />
-                    
-                    <drop css:theme=".gl-one-column-layout" />
-                    <drop css:theme=".gl-two-column-layout.gl-right-column" />
-                    <drop css:theme=".gl-two-column-layout.gl-right-sidebar" />
-                    <drop css:theme=".gl-three-column-layout" />
-                    
-                  
-            </rules>
-           
-            <!-- full width NO columns --> 
-              <rules if-content="not(//*[@id='portal-column-one']) and not(//*[@id='portal-column-two'])">
-                  
-                    <drop css:theme=".gl-three-column-layout" />
-                    <drop css:theme=".gl-two-column-layout" />
-              </rules>
-
-             <!-- three column -->
-             <rules if-content="//*[@id='portal-column-one'] and //*[@id='portal-column-two']">
-                
-                 <replace css:theme-children=".gl-three-column-layout .gl-first-column"
+        <drop css:theme=".gl-one-column-layout" />
+        <drop css:theme=".gl-two-column-layout.gl-right-column" />
+        <drop css:theme=".gl-two-column-layout.gl-right-sidebar" />
+        <drop css:theme=".gl-three-column-layout" />
+    </rules>
+    <!-- full width NO columns -->
+    <rules if-content="not(//*[@id='portal-column-one']) and not(//*[@id='portal-column-two'])">
+        <drop css:theme=".gl-three-column-layout" />
+        <drop css:theme=".gl-two-column-layout" />
+    </rules>
+    <!-- three column -->
+    <rules if-content="//*[@id='portal-column-one'] and //*[@id='portal-column-two']">
+        <replace css:theme-children=".gl-three-column-layout .gl-first-column"
                        css:content-children="#portal-column-one" />
-                 <replace css:theme-children=".gl-three-column-layout .gl-second-column"
+        <replace css:theme-children=".gl-three-column-layout .gl-second-column"
                        css:content-children="#portal-column-two" />
-                    <drop css:theme=".gl-one-column-layout" />
-                    <drop css:theme=".gl-two-column-layout" />
-
-             </rules>
-             
-          <!-- special support for plone.app.debugtoolbar -->
-          <before css:theme-children="body" css:content="#debug-toolbar-trigger" />
-          <before css:theme-children="body" css:content="#debug-toolbar" />
-        
-        <!-- inject a new class .gl-first-heading class
+        <drop css:theme=".gl-one-column-layout" />
+        <drop css:theme=".gl-two-column-layout" />
+    </rules>
+    <!-- special support for plone.app.debugtoolbar -->
+    <before css:theme-children="body" css:content="#debug-toolbar-trigger" />
+    <before css:theme-children="body" css:content="#debug-toolbar" />
+    <!-- inject a new class .gl-first-heading class
          into h1s that have class documentFirstHeading -->
-        <xsl:template css:match="h1.documentFirstHeading">
+    <xsl:template css:match="h1.documentFirstHeading">
         <xsl:copy>
-            <xsl:attribute name="class">gl-first-heading <xsl:value-of select="./@class" /></xsl:attribute>
+            <xsl:attribute name="class">gl-first-heading 
+                <xsl:value-of select="./@class" />
+            </xsl:attribute>
             <xsl:copy-of select="@*" />
             <xsl:apply-templates />
         </xsl:copy>
-        </xsl:template>
-          <!-- ** custom navbar compatible with webflow ** -->
-        <!-- <xsl:template match="div[@id='content']">
-         <xsl:copy>
-            <xsl:attribute name="class">gl-content</xsl:attribute>
-            <xsl:copy-of select="@*" />
-            <xsl:apply-templates />
-        </xsl:copy>
-        </xsl:template>
+    </xsl:template>
+    <!-- inject a new class .news-image-container class
+         into divs that have class newsImageContainer -->
+    <replace css:content="div.newsImageContainer">
+        <div>
+            <xsl:attribute name="class">news-image-container</xsl:attribute>
+            <xsl:copy-of select="./*" />
+        </div>
+    </replace>
+    <!-- ** custom navbar compatible with webflow ** -->
+    <!-- <xsl:template match="div[@id='content']"><xsl:copy><xsl:attribute name="class">gl-content</xsl:attribute><xsl:copy-of select="@*" /><xsl:apply-templates /></xsl:copy></xsl:template>
         -->
-        <!-- ** custom navbar compatible with webflow ** -->
-        <replace css:theme-children="nav.gl-menu"> <!-- find any nav with a .gl-menu and fill generate a menu with a tags -->
-          <xsl:for-each css:select="ul#portal-globalnav > li">
-            
+    <!-- ** custom navbar compatible with webflow ** -->
+    <replace css:theme-children="nav.gl-menu">
+        <!-- find any nav with a .gl-menu and fill generate a menu with a tags -->
+        <xsl:for-each css:select="ul#portal-globalnav > li">
             <!-- add classes from the portal-globalnav li to our a tag -->
-            <xsl:if test="not(ul)"><a><xsl:attribute name="class"><xsl:value-of select="./@class" /> w-nav-link gl-menu-link <xsl:choose><xsl:when test="@class[contains(., 'selected')]">active</xsl:when></xsl:choose>
-              </xsl:attribute><xsl:attribute name="href"><xsl:value-of select="./a/@href" /></xsl:attribute>
-              <xsl:copy-of select="./a/text()" /></a>
-              <!-- check for the presence of a ul which means it is a drop down menu -->
-             </xsl:if> 
-             
-             <xsl:if test="ul">
-                    <div class="w-dropdown dropdown" data-delay="0" 
+            <xsl:if test="not(ul)">
+                <a>
+                    <xsl:attribute name="class">
+                        <xsl:value-of select="./@class" /> w-nav-link gl-menu-link 
+                        <xsl:choose>
+                            <xsl:when test="@class[contains(., 'selected')]">active</xsl:when>
+                        </xsl:choose>
+                    </xsl:attribute>
+                    <xsl:attribute name="href">
+                        <xsl:value-of select="./a/@href" />
+                    </xsl:attribute>
+                    <xsl:copy-of select="./a/text()" />
+                </a>
+                <!-- check for the presence of a ul which means it is a drop down menu -->
+            </xsl:if>
+            <xsl:if test="ul">
+                <div class="w-dropdown dropdown" data-delay="0"
                                              data-ix="dropdown-on-hover">
-                           <div class="w-dropdown-toggle gl-menu-link">
-                              <div><xsl:copy-of select="./a/text()" /></div><div class="w-icon-dropdown-toggle dropdown-icon"></div>
-                            </div>
-                        <nav class="w-dropdown-list dropdown-list" 
-                              style="opacity: 0; display: none; transition: opacity 500ms;">   
-                        <xsl:for-each css:select="ul > li">
-                        <a class="w-dropdown-link dropdown-link" href="#"><xsl:copy-of select="./a/text()" /></a>                             
-                        </xsl:for-each>
-                        </nav>
+                    <div class="w-dropdown-toggle gl-menu-link">
+                        <div>
+                            <xsl:copy-of select="./a/text()" />
+                        </div>
+                        <div class="w-icon-dropdown-toggle dropdown-icon"></div>
                     </div>
-              </xsl:if>
-            </xsl:for-each>
-        </replace>
-       <!-- nav compatible with menus that use li tags -->
-       <replace css:theme-children="nav.gl-menu-li-type .navbar-nav">
-          <xsl:for-each css:select="ul#portal-globalnav > li">
-            <li><a><xsl:attribute name="class">gl-menu-link <xsl:choose><xsl:when test="@class[contains(., 'selected')]">active</xsl:when></xsl:choose>
-              </xsl:attribute><xsl:attribute name="href"><xsl:value-of select="./a/@href" /></xsl:attribute><xsl:copy-of select="./a/text()" /></a></li>
-            </xsl:for-each>
-      </replace>
-        
- <xsl:template match="//input[@type[contains(., 'submit') or contains(., 'button')]]">
-      <input>
-        <xsl:copy-of select="attribute::*[not(name()='class')]" />
-        <xsl:attribute name="class"><xsl:value-of select="@class" /> btn button gl-button
-            <xsl:choose><xsl:when test="@class[contains(., 'destructive')]">btn-danger gl-hot-button</xsl:when>
-            <xsl:when test="@class[contains(., 'standalone')]">btn-info gl-cooler-button</xsl:when>
-            <xsl:when test="@class[contains(., 'context')]">btn-primary gl-cool-button</xsl:when>
-            <xsl:otherwise>btn-default gl-default-button</xsl:otherwise>
-            </xsl:choose>  
-        </xsl:attribute>
-    </input>
-  </xsl:template>
-  <xsl:template match="//input[@type[contains(., 'checkbox') or contains(., 'text') or contains(., 'password') or contains(., 'radio')]]">
-      <input>
-        <xsl:copy-of select="attribute::*[not(name()='class')]" />
-        <xsl:attribute name="class"><xsl:value-of select="@class" /> 
-            <xsl:choose><xsl:when test="@type[contains(., 'checkbox')]"> 
+                    <nav class="w-dropdown-list dropdown-list"
+                              style="opacity: 0; display: none; transition: opacity 500ms;">
+                        <xsl:for-each css:select="ul > li">
+                            <a class="w-dropdown-link dropdown-link" href="#">
+                                <xsl:copy-of select="./a/text()" />
+                            </a>
+                        </xsl:for-each>
+                    </nav>
+                </div>
+            </xsl:if>
+        </xsl:for-each>
+    </replace>
+    <!-- nav compatible with menus that use li tags -->
+    <replace css:theme-children="nav.gl-menu-li-type .navbar-nav">
+        <xsl:for-each css:select="ul#portal-globalnav > li">
+            <li>
+                <a>
+                    <xsl:attribute name="class">gl-menu-link 
+                        <xsl:choose>
+                            <xsl:when test="@class[contains(., 'selected')]">active</xsl:when>
+                        </xsl:choose>
+                    </xsl:attribute>
+                    <xsl:attribute name="href">
+                        <xsl:value-of select="./a/@href" />
+                    </xsl:attribute>
+                    <xsl:copy-of select="./a/text()" />
+                </a>
+            </li>
+        </xsl:for-each>
+    </replace>
+    <replace content="//input[@type[contains(., 'submit') or contains(., 'button')]]">
+        <xsl:copy>
+            <xsl:copy-of select="attribute::*[not(name()='class')]" />
+            <xsl:attribute name="class">
+                <xsl:value-of select="@class" /> btn button gl-button
+            
+                <xsl:choose>
+                    <xsl:when test="@class[contains(., 'destructive')]">btn-danger gl-hot-button</xsl:when>
+                    <xsl:when test="@class[contains(., 'standalone')]">btn-info gl-cooler-button</xsl:when>
+                    <xsl:when test="@class[contains(., 'context')]">btn-primary gl-cool-button</xsl:when>
+                    <xsl:otherwise>btn-default gl-default-button</xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+            <xsl:apply-templates />
+        </xsl:copy>
+    </replace>
+    <xsl:template match="//input[@type[contains(., 'checkbox') or contains(., 'text') or contains(., 'password') or contains(., 'radio')]]">
+        <input>
+            <xsl:copy-of select="attribute::*[not(name()='class')]" />
+            <xsl:attribute name="class">
+                <xsl:value-of select="@class" />
+                <xsl:choose>
+                    <xsl:when test="@type[contains(., 'checkbox')]">
              w-checkbox-input
             </xsl:when>
-            </xsl:choose>
-            <xsl:choose><xsl:when test="@type[contains(., 'radio')]"> 
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="@type[contains(., 'radio')]">
             w-radio-input
             </xsl:when>
-            </xsl:choose>
-            <xsl:choose><xsl:when test="@type[contains(., 'password')]"> 
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="@type[contains(., 'password')]">
             w-input
             </xsl:when>
-            </xsl:choose>
-            <xsl:choose><xsl:when test="@type[contains(., 'text')]"> 
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="@type[contains(., 'text')]">
             w-input
             </xsl:when>
-            </xsl:choose>
-        </xsl:attribute>
-    </input>
-</xsl:template>
-
-  <xsl:template match="//label">
-      <label>
-        <xsl:copy-of select="attribute::*[not(name()='class')]" />
-        <xsl:attribute name="class"> gl-form-label</xsl:attribute>
-        <xsl:value-of select="." />
-      </label>
-  </xsl:template>
-  <xsl:template match="//fieldset">
-         <xsl:copy>
+                </xsl:choose>
+            </xsl:attribute>
+        </input>
+    </xsl:template>
+    <xsl:template match="//label">
+        <label>
+            <xsl:copy-of select="attribute::*[not(name()='class')]" />
+            <xsl:attribute name="class"> gl-form-label</xsl:attribute>
+            <xsl:value-of select="." />
+        </label>
+    </xsl:template>
+    <xsl:template match="//fieldset">
+        <xsl:copy>
             <xsl:attribute name="class">gl-fieldset</xsl:attribute>
             <xsl:copy-of select="@*" />
             <xsl:apply-templates />
         </xsl:copy>
-  </xsl:template>
-
-
-          <!-- end of gloss rules -->
+    </xsl:template>
+    <!-- added -->
+    <replace css:content="h1.documentFirstHeading">
+        <h1>
+            <xsl:attribute name="class">document-first-heading 
+                <xsl:value-of select="./@class" />
+            </xsl:attribute>
+            <xsl:value-of select="./text()" />
+        </h1>
+    </replace>
+    <replace css:content="header">
+        <div>
+            <xsl:attribute name="class">header-header 
+                <xsl:value-of select="./@class" />
+            </xsl:attribute>
+            <xsl:copy-of select="./*" />
+        </div>
+    </replace>
+    <!-- add gl-message classes to portalMessage -->
+    <replace css:content=".portalMessage">
+        <xsl:copy>
+            <xsl:attribute name="class">
+                <xsl:value-of select="./@class" /> gl-message
+            
+                <xsl:choose>
+                    <xsl:when test="@class[contains(., 'info')]">
+             gl-info-message
+            </xsl:when>
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="@class[contains(., 'warning')]">
+             gl-warning-message
+            </xsl:when>
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="@class[contains(., 'error')]">
+             gl-error-message
+            </xsl:when>
+                </xsl:choose>
+            </xsl:attribute>
+            <xsl:apply-templates />
+        </xsl:copy>
+    </replace>
+    <!-- add special class to portalMessage links -->
+    <replace css:content=".portalMessage a">
+        <xsl:copy>
+            <xsl:copy-of select="attribute::*[not(name()='class')]" />
+            <xsl:attribute name="class">
+                <xsl:value-of select="./@class" /> gl-message-link
+		
+                <xsl:choose>
+                    <xsl:when test="../../@class[contains(., 'info')]">
+            gl-info-message-link
+            </xsl:when>
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="../../@class[contains(., 'warning')]">
+            gl-warning-message-link
+            </xsl:when>
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="../../@class[contains(., 'error')]">
+	    gl-error-message-link
+            </xsl:when>
+                </xsl:choose>
+            </xsl:attribute>
+            <xsl:apply-templates />
+        </xsl:copy>
+    </replace>
+    <replace css:content=".portalMessage strong">
+        <xsl:copy>
+            <xsl:attribute name="class">
+                <xsl:value-of select="./@class" /> gl-message-label
+            
+                <xsl:choose>
+                    <xsl:when test="../@class[contains(., 'info')]">
+             gl-info-message-label
+            </xsl:when>
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="../@class[contains(., 'warning')]">
+             gl-warning-message-label
+            </xsl:when>
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="../@class[contains(., 'error')]">
+             gl-error-message-label
+            </xsl:when>
+                </xsl:choose>
+            </xsl:attribute>
+            <xsl:apply-templates />
+        </xsl:copy>
+    </replace>
+    <replace css:content=".portalMessage dt">
+        <xsl:copy>
+            <xsl:attribute name="class">
+                <xsl:value-of select="./@class" /> gl-message-label
+            
+                <xsl:choose>
+                    <xsl:when test="../@class[contains(., 'info')]">
+             gl-info-message-label
+            </xsl:when>
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="../@class[contains(., 'warning')]">
+             gl-warning-message-label
+            </xsl:when>
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="../@class[contains(., 'error')]">
+             gl-error-message-label
+            </xsl:when>
+                </xsl:choose>
+            </xsl:attribute>
+            <xsl:apply-templates />
+        </xsl:copy>
+    </replace>
+    <!-- customizing the photo album -->
+    <replace css:content="div.photoAlbumEntry">
+        <div>
+            <xsl:attribute name="class">photo-album-entry 
+                <xsl:value-of select="./@class" />
+            </xsl:attribute>
+            <xsl:copy-of select="./*" />
+        </div>
+    </replace>
+    <replace css:content="span.photoAlbumEntryWrapper">
+        <span>
+            <xsl:attribute name="class">photo-album-entry-wrapper 
+                <xsl:value-of select="./@class" />
+            </xsl:attribute>
+            <xsl:copy-of select="./*" />
+        </span>
+    </replace>
+    <replace css:content="span.photoAlbumEntryTitle">
+        <div>
+            <xsl:attribute name="class">photo-album-entry-title 
+                <xsl:value-of select="./@class"/>
+            </xsl:attribute>
+            <xsl:copy-of select="./*" />
+        </div>
+    </replace>
+    <replace content="//label">
+        <xsl:copy>
+            <xsl:copy-of select="attribute::*[not(name()='class')]" />
+            <xsl:attribute name="class">
+                <xsl:value-of select="./@class" />
+        gl-label
+       
+            </xsl:attribute>
+            <xsl:copy-of select="@*" />
+            <xsl:apply-templates />
+        </xsl:copy>
+    </replace>
+    <replace content="//select">
+        <xsl:copy>
+            <xsl:copy-of select="attribute::*[not(name()='class')]" />
+            <xsl:attribute name="class">
+                <xsl:value-of select="./@class" />
+        gl-select
+       
+            </xsl:attribute>
+            <xsl:copy-of select="@*" />
+            <xsl:apply-templates />
+        </xsl:copy>
+    </replace>
+    <replace content="//textarea">
+        <xsl:copy>
+            <xsl:copy-of select="attribute::*[not(name()='class')]" />
+            <xsl:attribute name="class">
+                <xsl:value-of select="@class" />
+                <xsl:choose>
+                    <xsl:when test="@class[contains(., 'blurrable')]">
+             blurrable
+            </xsl:when>
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="@class[contains(., 'firstToFocus')]">
+            firstFocus
+            </xsl:when>
+                </xsl:choose> gl-textarea
+        
+            </xsl:attribute>
+            <xsl:value-of select="." />
+        </xsl:copy>
+    </replace>
+    <replace content="//iframe">
+        <xsl:copy>
+            <xsl:copy-of select="attribute::*[not(name()='class')]" />
+            <xsl:attribute name="class">
+                <xsl:value-of select="@class" />
+		  gl-iframe
+              
+            </xsl:attribute>
+            <xsl:value-of select="." />
+            <xsl:apply-templates />
+        </xsl:copy>
+    </replace>
+    <replace css:content="p.callout">
+        <xsl:copy>
+            <xsl:copy-of select="attribute::*[not(name()='class')]" />
+            <xsl:attribute name="class">
+                <xsl:value-of select="@class" />
+		      gl-callout
+              
+            </xsl:attribute>
+            <xsl:value-of select="." />
+            <xsl:apply-templates />
+        </xsl:copy>
+    </replace>
+    <replace css:content="span.required">
+        <xsl:copy>
+            <xsl:copy-of select="attribute::*[not(name()='class')]" />
+            <xsl:attribute name="class">
+                <xsl:value-of select="@class" /> gl-required-form-marker
+            </xsl:attribute>
+            <xsl:value-of select="." />
+            <xsl:apply-templates />
+        </xsl:copy>
+    </replace>
+    <replace content="//input">
+        <xsl:copy>
+            <xsl:copy-of select="attribute::*[not(name()='class')]" />
+            <xsl:attribute name="class">
+                <xsl:value-of select="@class" />
+                <xsl:choose>
+                    <xsl:when test="@type[contains(., 'checkbox')]">
+             gl-checkbox-input w-checkbox-input
+            </xsl:when>
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="@type[contains(., 'radio')]">
+            gl-radio-input w-radio-input
+            </xsl:when>
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="@type[contains(., 'password')]">
+            gl-password-input w-input
+            </xsl:when>
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="@type[contains(., 'text')]">
+            gl-text-input w-input
+            </xsl:when>
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="@type[contains(., 'submit')]">
+            gl-submit-form-button gl-form-button w-input
+            </xsl:when>
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="@class[contains(., 'standalone')]">
+            gl-submit-form-button gl-form-button w-input
+            </xsl:when>
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="@class[contains(., 'destructive')]">
+            gl-cancel-form-button gl-form-button w-input
+            </xsl:when>
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="@class[contains(., 'context')]">
+            gl-form-button w-input
+            </xsl:when>
+                </xsl:choose>
+            </xsl:attribute>
+            <xsl:value-of select="." />
+            <xsl:apply-templates />
+        </xsl:copy>
+    </replace>
+    <!-- end of gloss rules -->
 </rules>
