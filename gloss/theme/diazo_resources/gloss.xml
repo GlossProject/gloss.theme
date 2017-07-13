@@ -32,6 +32,7 @@
             .gl-content-title
             .gl-footer
             .gl-below-content
+            .gl-status - inject portal messages here
             .gl-drop
             .gl-front-drop
             .gl-inner-drop
@@ -105,6 +106,8 @@
                 css:content="#portal-searchbox" />
     <before css:theme-children=".gl-breadcrumbs"
                 css:content="#portal-breadcrumbs" />
+    <before css:theme-children=".gl-status"
+                css:content="#global_statusmessage" />    
     <replace css:theme-children=".gl-content"
                 css:content="#content" />
     <replace css:theme-children=".gl-below-content"
