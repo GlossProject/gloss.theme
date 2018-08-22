@@ -322,12 +322,13 @@
         </h1>
     </replace>
     <replace css:content="header">
-        <div>
-            <xsl:attribute name="class">header-header 
-                <xsl:value-of select="./@class" />
-            </xsl:attribute>
-            <xsl:copy-of select="./*" />
-        </div>
+      <xsl:element name="div">
+	<xsl:copy>
+	    <xsl:copy-of select="@*" />
+	    <xsl:attribute name="class">header-header <xsl:value-of select="./@class" /></xsl:attribute>
+	    <xsl:apply-templates />
+	</xsl:copy>
+      </xsl:element>
     </replace>
     <!-- add gl-message classes to portalMessage -->
     <replace css:content=".portalMessage">
